@@ -5,7 +5,11 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { apiResponse: "" };
+    this.state = { apiResponse: "", songName: "", artistName: "" };
+
+    this.handleSongChange = this.handleSongChange.bind(this);
+    this.handleArtistChange = this.handleArtistChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   callAPI() {
@@ -18,12 +22,38 @@ class App extends Component {
     this.callAPI();
   }
 
+  handleSongChange(event) {
+    this.setState({songName: event.target.value});
+  }
+
+  handleArtistChange(event) {
+    console.log("event: ", event.target);
+    this.setState({artistName: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A song was submitted: ' + this.state.songName + ' by: ' + this.state.artistName);
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React!</h1>
+          {/* <img src="../public/dis.png" className="App-logo" alt="logo" /> */}
+          <h1 className="App-title">Input Song Recommendations</h1>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Song Name:
+              <input type="text" value={this.state.songName} onChange={this.handleSongChange} />
+            </label>
+            <label>
+              Artist Name:
+              <input type="text" value={this.state.artistName} onChange={this.handleArtistChange} />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
         </header>
         <p className="intro">{this.state.apiResponse}</p>
       </div>
