@@ -48,10 +48,12 @@ class App extends Component {
               Song Name:
               <input type="text" value={this.state.songName} onChange={this.handleSongChange} />
             </label>
+            <br></br>
             <label>
               Artist Name:
               <input type="text" value={this.state.artistName} onChange={this.handleArtistChange} />
             </label>
+            <br></br>
             <input type="submit" value="Submit" />
           </form>
         </header>
